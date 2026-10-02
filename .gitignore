@@ -1,0 +1,10 @@
+# Fotos subidas por los usuarios (no se versionan)
+uploaded_files/*
+!uploaded_files/.gitkeep
+!uploaded_files/.htaccess
+
+# Archivos del sistema operativo / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log

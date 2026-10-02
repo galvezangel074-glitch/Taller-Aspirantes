@@ -1,0 +1,40 @@
+# =====================================================================
+# uploaded_files/.htaccess
+# SEGURIDAD: esta carpeta NO debe ser accesible desde el navegador.
+# Si alguien intenta abrir http://localhost/Taller-Aspirantes/uploaded_files/
+# o cualquier archivo dentro, Apache responde 403 Forbidden.
+# =====================================================================
+
+# --- Apache 2.4 (el que trae WampServer) ---
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+
+# --- Apache 2.2 (compatibilidad) ---
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
+
+# Desactiva la ejecución de PHP dentro de la carpeta.
+# Evita que una imagen con código PHP incrustado llegue a ejecutarse.
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+
+# Bloqueo explícito de cualquier archivo ejecutable
+<FilesMatch "\.(php|phtml|phar|php3|php4|php5|php7|phps|cgi|pl|asp|aspx|exe|sh)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# No listar el contenido del directorio
+Options -Indexes -ExecCGI
