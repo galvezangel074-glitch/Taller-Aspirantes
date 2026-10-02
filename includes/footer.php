@@ -30,9 +30,9 @@ if (basename($_SERVER['PHP_SELF']) === 'footer.php') {
 
         <!-- Redes sociales y contacto (Bootstrap Icons) -->
         <div class="mb-2">
-            <a href="#" class="text-white mx-2" aria-label="GitHub"><i class="bi bi-github fs-5"></i></a>
-            <a href="#" class="text-white mx-2" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
-            <a href="mailto:soporte@utp.ac.pa" class="text-white mx-2" aria-label="Correo de soporte">
+            <a href="angel.galvez" class="text-white mx-2" aria-label="GitHub"><i class="bi bi-github fs-5"></i></a>
+            <a href="angel.galvez" class="text-white mx-2" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+            <a href="mailto:angel.galvesoporte@utp.ac.pa" class="text-white mx-2" aria-label="Correo de soporte">
                 <i class="bi bi-envelope-fill fs-5"></i>
             </a>
         </div>

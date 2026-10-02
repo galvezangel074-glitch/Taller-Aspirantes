@@ -26,7 +26,7 @@ if ($paginaActual === 'header.php') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Admisión de la UTP</title>
     <meta name="description" content="Sistema de admisión de datos para aspirantes">
-    <meta name="author" content="Universidad Tecnológica de Panamá / Angel Gálvez">
+    <meta name="Angel Galvez" content="Universidad Tecnológica de Panamá / Angel Gálvez">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#212529">
 
