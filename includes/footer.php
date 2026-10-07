@@ -34,7 +34,7 @@ if (basename($_SERVER['PHP_SELF']) === 'footer.php') {
                target="_blank" rel="noopener noreferrer"><i class="bi bi-github fs-5"></i></a>
             <a href="https://www.linkedin.com/in/angel-g%C3%A1lvez-a3a15635a/" class="text-white mx-2" aria-label="LinkedIn"
                target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin fs-5"></i></a>
-            <a href="mailto:angel.galvesoporte@utp.ac.pa" class="text-white mx-2" aria-label="Correo de soporte">
+            <a href="mailto:angel.galvezsoporte@utp.ac.pa" class="text-white mx-2" aria-label="Correo de soporte">
                 <i class="bi bi-envelope-fill fs-5"></i>
             </a>
         </div>
