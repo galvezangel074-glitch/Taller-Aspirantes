@@ -23,6 +23,8 @@ formato del texto y almacena la fotografía de forma segura en el servidor **sin
 ```
 Taller-Aspirantes/
 │
+├── capturas/           (Capturas de pantalla usadas como evidencia en este README)
+│
 ├── includes/
 │   ├── header.php      (Contiene el <header>, Navbar y Breadcrumb dinámico)
 │   ├── footer.php      (Contiene el <footer> con enlaces y año dinámico)
@@ -142,6 +144,47 @@ Además:
 | Escribir `<script>alert(1)</script>` | El texto se neutraliza, no se ejecuta |
 | Abrir `http://localhost/Taller-Aspirantes/uploaded_files/` | **403 Forbidden** |
 | Entrar directo a `procesar.php` | Redirige a `index.php` |
+
+---
+
+## Capturas de pantalla (evidencia)
+
+### 1. Formulario de registro
+Página principal (`index.php`) con la navegación, el formulario y el pie de página incluidos con `include`.
+
+![Formulario de registro](capturas/01-formulario.png)
+
+### 2. Formulario lleno
+Los datos se escriben a propósito en minúsculas (`sofía isabel`, `pérez castillo`) para comprobar la estandarización.
+
+![Formulario lleno](capturas/02-formulario-lleno.png)
+
+### 3. Registro exitoso
+`procesar.php` estandariza la salida (`Sofía Isabel`, `Pérez Castillo`), calcula la edad,
+guarda la foto en `uploaded_files/` con un nombre nuevo y muestra el resultado.
+
+![Registro exitoso](capturas/03-registro-exitoso.png)
+
+### 4. Validación de campos vacíos (servidor)
+Al enviar el formulario vacío, el servidor rechaza el registro e indica cada campo faltante.
+
+![Error de campos vacíos](capturas/04-error-campos-vacios.png)
+
+### 5. Validación del rango de edad
+Una fecha de nacimiento que da 14 años es rechazada (rango permitido: 18 a 70 años).
+
+![Error de edad](capturas/05-error-edad.png)
+
+### 6. Validación de extensiones
+Al subir un archivo `.pdf` se rechaza: solo se aceptan `jpg`, `jpeg`, `png` y `gif`.
+
+![Error de extensión](capturas/06-error-extension.png)
+
+### 7. Carpeta de fotos protegida
+Al abrir `http://localhost/Taller-Aspirantes/uploaded_files/` Apache responde **403 Forbidden**
+gracias al `.htaccess`.
+
+![Carpeta protegida](capturas/07-carpeta-protegida.png)
 
 ---
 
