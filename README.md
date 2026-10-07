@@ -60,7 +60,7 @@ Taller-Aspirantes/
 4. Llenar el formulario y presionar **Registrar Aspirante**.
 
 Las fotografías quedan guardadas en `uploaded_files/` con un nombre generado por el sistema:
-`aspirante_<identificacion>_<fecha_hora>.<extensión>`
+`aspirante_<identificacion>_<fecha_hora>_<aleatorio>.<extensión>`
 
 ---
 
@@ -87,6 +87,8 @@ actual y cambiar las migas de pan con una estructura `if / else`.
 - Campos de tipo `text` (nombre, apellido, identificación), `date` (fecha de nacimiento),
   `radio` (sexo) y `file` (fotografía).
 - Todos los campos son `required` y usan el atributo `placeholder`.
+- El formulario lleva `novalidate` para que la validación de campos vacíos la haga
+  **el servidor** (`procesar.php`) y se puedan ver sus mensajes de error.
 
 ### Validaciones en el backend (`procesar.php`)
 | Validación | Implementación |
@@ -95,14 +97,14 @@ actual y cambiar las migas de pan con una estructura `if / else`.
 | Campos no vacíos | Estructura `if` por cada campo |
 | Edad entre 18 y 70 años | `DateTime::diff()` sobre la fecha de nacimiento |
 | Sexo válido | `in_array()` con lista blanca |
-| Extensión de imagen | `pathinfo()` + `in_array()` (jpg, jpeg, png, gif, webp) |
+| Extensión de imagen | `pathinfo()` + `in_array()` (jpg, jpeg, png, gif) |
 | El archivo es una imagen real | `getimagesize()` |
 | Tamaño máximo 2 MB | `$_FILES['foto']['size']` |
 
 ### Funciones de saneamiento y normalización
 | Función | Uso |
 |---|---|
-| `htmlspecialchars()` | Previene XSS en toda la salida en pantalla |
+| `htmlspecialchars()` | Previene XSS en toda la salida en pantalla (datos del aspirante y mensajes de error) |
 | `strip_tags()` | Elimina etiquetas HTML/PHP de los campos de texto |
 | `trim()` | Quita espacios al inicio y al final |
 | `ucwords(strtolower())` | Formato Tipo Título en Nombre y Apellido ("sofia" → "Sofia"). Se aplica a través de la función `formatoTipoTitulo()`, que usa la versión multibyte (`mb_convert_case` + `mb_strtolower`) porque `ucwords`/`strtolower` trabajan byte a byte y rompen los acentos del español: `ucwords(strtolower("JOSÉ"))` devuelve `"JosÉ"` y `"NÚÑEZ"` devuelve `"NÚÑez"`. Con la versión multibyte se obtiene `"José"` y `"Núñez"`. Si `mbstring` no estuviera activa, la función cae de vuelta a `ucwords(strtolower())` |
@@ -133,9 +135,9 @@ Además:
 
 | Prueba | Resultado esperado |
 |---|---|
-| Dejar un campo vacío | El navegador bloquea el envío (`required`) |
+| Dejar un campo vacío | El servidor muestra "El campo ... es obligatorio" |
 | Fecha que dé 17 o 71 años | Mensaje de error de rango de edad |
-| Subir un archivo `.pdf` o `.txt` | Mensaje de formato no permitido |
+| Subir un archivo `.pdf`, `.txt` o `.webp` | Mensaje de formato no permitido |
 | Escribir `sofia` en Nombre | Se guarda y muestra como `Sofia` |
 | Escribir `<script>alert(1)</script>` | El texto se neutraliza, no se ejecuta |
 | Abrir `http://localhost/Taller-Aspirantes/uploaded_files/` | **403 Forbidden** |
@@ -151,14 +153,14 @@ HTML5 · CSS3 · Bootstrap v5.3.8 · Bootstrap Icons 1.11.3 · PHP · Apache (Wa
 
 ## Control de versiones
 
-El proyecto viene con un repositorio Git ya inicializado y con el primer commit hecho.
-Para publicarlo en GitHub:
+Todo el código fuente está publicado en GitHub:
+
+**https://github.com/galvezangel074-glitch/Taller-Aspirantes**
+
+Para clonarlo:
 
 ```bash
-cd Taller-Aspirantes
-git remote add origin https://github.com/TU-USUARIO/Taller-Aspirantes.git
-git branch -M main
-git push -u origin main
+git clone https://github.com/galvezangel074-glitch/Taller-Aspirantes.git
 ```
 
 El archivo `.gitignore` excluye las fotos subidas por los usuarios, pero conserva la

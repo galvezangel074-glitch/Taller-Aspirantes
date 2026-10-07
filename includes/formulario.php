@@ -67,10 +67,10 @@ if (basename($_SERVER['PHP_SELF']) === 'formulario.php') {
             <!-- ---------- Fotografía ---------- -->
             <div class="mb-4">
                 <label for="foto" class="form-label fw-bold">
-                    Fotografía del Aspirante (png, jpg, jpeg, gif, webp):
+                    Fotografía del Aspirante (jpg, jpeg, png, gif):
                 </label>
                 <input type="file" class="form-control" id="foto" name="foto"
-                       accept=".png,.jpg,.jpeg,.gif,.webp" required>
+                       accept=".jpg,.jpeg,.png,.gif" required>
                 <div class="form-text">Tamaño máximo permitido: 2 MB.</div>
             </div>
 

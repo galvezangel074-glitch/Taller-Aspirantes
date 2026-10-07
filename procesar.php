@@ -76,21 +76,21 @@ $sexo           = trim(strip_tags($_POST['sexo'] ?? ''));
    PASO 2: VALIDACIÓN DE CAMPOS VACÍOS (estructura IF)
    --------------------------------------------------------------------- */
 if ($nombre === '') {
-    $errores[] = 'El campo <strong>Nombre</strong> es obligatorio.';
+    $errores[] = 'El campo Nombre es obligatorio.';
 }
 if ($apellido === '') {
-    $errores[] = 'El campo <strong>Apellido</strong> es obligatorio.';
+    $errores[] = 'El campo Apellido es obligatorio.';
 }
 if ($identificacion === '') {
-    $errores[] = 'El campo <strong>Identificación</strong> es obligatorio.';
+    $errores[] = 'El campo Identificación es obligatorio.';
 }
 if ($fechaNac === '') {
-    $errores[] = 'El campo <strong>Fecha de Nacimiento</strong> es obligatorio.';
+    $errores[] = 'El campo Fecha de Nacimiento es obligatorio.';
 }
 
 // El sexo se valida contra una lista blanca: nunca se confía en el valor recibido.
 if (!in_array($sexo, ['Hombre', 'Mujer'], true)) {
-    $errores[] = 'Debe seleccionar una opción válida en el campo <strong>Sexo</strong>.';
+    $errores[] = 'Debe seleccionar una opción válida en el campo Sexo.';
 }
 
 /* ---------------------------------------------------------------------
@@ -103,16 +103,16 @@ if ($fechaNac !== '') {
     $hoy = new DateTime();
 
     if (!$nacimiento || $nacimiento->format('Y-m-d') !== $fechaNac) {
-        $errores[] = 'La <strong>Fecha de Nacimiento</strong> no tiene un formato válido.';
+        $errores[] = 'La Fecha de Nacimiento no tiene un formato válido.';
     } elseif ($nacimiento > $hoy) {
-        $errores[] = 'La <strong>Fecha de Nacimiento</strong> no puede ser una fecha futura.';
+        $errores[] = 'La Fecha de Nacimiento no puede ser una fecha futura.';
     } else {
         // diff()->y devuelve los años completos transcurridos
         $edad = $nacimiento->diff($hoy)->y;
 
         if ($edad < 18 || $edad > 70) {
-            $errores[] = 'La edad del aspirante debe estar entre <strong>18 y 70 años</strong>. '
-                       . 'Edad calculada: <strong>' . $edad . ' años</strong>.';
+            $errores[] = 'La edad del aspirante debe estar entre 18 y 70 años. '
+                       . 'Edad calculada: ' . $edad . ' años.';
         }
     }
 }
@@ -120,13 +120,13 @@ if ($fechaNac !== '') {
 /* ---------------------------------------------------------------------
    PASO 4: VALIDACIÓN DE LA FOTOGRAFÍA
    --------------------------------------------------------------------- */
-$extensionesPermitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+$extensionesPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
 $tamanoMaximo   = 2 * 1024 * 1024;        // 2 MB
 $carpetaDestino = './uploaded_files/';
 $extension      = '';
 
 if (!isset($_FILES['foto']) || $_FILES['foto']['error'] === UPLOAD_ERR_NO_FILE) {
-    $errores[] = 'Debe adjuntar la <strong>Fotografía del Aspirante</strong>.';
+    $errores[] = 'Debe adjuntar la Fotografía del Aspirante.';
 
 } elseif ($_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
     // Mensaje específico según el código devuelto por PHP
@@ -232,7 +232,7 @@ include 'includes/header.php';
                             <p class="mb-2">Se encontraron los siguientes problemas:</p>
                             <ul class="mb-0">
                                 <?php foreach ($errores as $error): ?>
-                                    <li><?php echo $error; ?></li>
+                                    <li><?php echo htmlspecialchars($error); ?></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -260,7 +260,7 @@ include 'includes/header.php';
                                     if (is_file($rutaFoto)) {
                                         $mime   = $infoImagen['mime'] ?? 'image/jpeg';
                                         $base64 = base64_encode(file_get_contents($rutaFoto));
-                                        echo '<img src="data:' . $mime . ';base64,' . $base64 . '" '
+                                        echo '<img src="data:' . htmlspecialchars($mime) . ';base64,' . $base64 . '" '
                                            . 'class="img-fluid rounded border" alt="Fotografía del aspirante">';
                                     }
                                     ?>
